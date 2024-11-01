@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-04 11:39+0200\n"
+"PO-Revision-Date: 2022-07-07 12:56+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: partials/settings-display.phtml:2
+msgid "GRÜN spendino"
+msgstr "GRÜN spendino"
+
+#: partials/button-modals.phtml:83
+msgid "Save Changes"
+msgstr "Änderung Speichern"
+
+#: partials/settings-display.phtml:82 112
+msgid "Close"
+msgstr "Schließen"
+
+#: partials/settings-display.phtml:64
+msgid "Add New Form"
+msgstr "Neues Formular hinzufügen"
+
+#: partials/settings-display.phtml:67
+msgid "Connect API"
+msgstr "API Verbinden"
+
+#: partials/settings-display.phtml:71
+msgid "Retrieve Data"
+msgstr "Daten abrufen"
+
+#: partials/form-table.phtml:50
+msgid "Form Name"
+msgstr "Formular Name"
+
+#: partials/form-table.phtml:51
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Settings"
+msgstr "Einstellung"
+
+msgid "About"
+msgstr "Info"
+
+msgid "Form"
+msgstr "Formular"
+
+msgid "Display"
+msgstr "Darstellung"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "API Connection Settings"
+msgstr "API Verbindungseinstellungen"
+
+msgid "API-Key"
+msgstr "API-Schlüssel"
+
+msgid "API Secret"
+msgstr "API Secret"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Test Connection"
+msgstr "Verbindung testen"
+
+#: partials/settings-display.phtml:58
+msgid "With the GRÜN spendino plugin you can easily and flexibly add your spendino forms to your WordPress website."
+msgstr "Mit dem GRÜN spendino Plugin können Sie Ihre spendino Formulare einfach und flexibel in Ihre Wordpress-Webseite einfügen. "
+
+#: partials/settings-display.phtml:59
+msgid "To do this, first connect to GRÜN spendino by specifying an API key and download the currently defined forms."
+msgstr "Dazu verbinden Sie sich zunächst mit GRÜN spendino durch Angabe eines API-Keys und laden die aktuell definierten Formulare herunter."
+
+#: partials/settings-display.phtml:60
+msgid "With a few clicks you can now define different representations of the forms and insert them via wordpress shortcode at any place in your pages."
+msgstr "Mit wenigen Klicks können Sie nun verschiedene Darstellungen der Formulare definieren und per wordpress shortcode an beliebigen Stellen in Ihren Seiten einfügen."
+
+#: partials/form-table.phtml:63
+msgid "Edit"
+msgstr "bearbeiten"
+
+#: partials/form-table.phtml:67
+msgid "Delete"
+msgstr "löschen"
+
+#: partials/about.phtml:9
+msgid "Created by Grün Software Group GmbH"
+msgstr "Erstellt von Grün Software Group GmbH"
+
+#: partials/about.phtml:11
+msgid "Address"
+msgstr "Adresse"
+
+#: partials/about.phtml:19
+msgid "Contact"
+msgstr "Kontakt"
+
+#: partials/about.phtml:23
+msgid "Website"
+msgstr "Webseite"
+
+#: partials/about.phtml:15
+msgid "Germany"
+msgstr "Deutschland"
+
+msgid "Copied"
+msgstr "Kopiert"
+
+msgid "Connection Successful"
+msgstr "Verbindung Erfolgreich."
+
+msgid "Edit Entry"
+msgstr "Eintrag bearbeiten"
+
+msgid "Add Entry"
+msgstr "Eintrag hinzufügen"
+
+msgid "Wrong credentials. Please try again."
+msgstr "Falsche Zugangsdaten. Bitte versuchen Sie es erneut."
+
+msgid " forms found"
+msgstr " Formulare gefunden"
+
+msgid " API Connection Settings"
+msgstr "API-Verbindungseinstellungen"

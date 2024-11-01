@@ -1,0 +1,124 @@
+<div class="wrap mt-3 mb-3">
+    <img src="<?php echo plugin_dir_url(__FILE__) ?>images/spendinologo.png" alt="spendino logo">
+</div>
+
+<?php
+/**
+ * SETS UP THE NAVIGATION TABS BETWEEN SETTINGS AND ABOUT SECTIONS
+ */
+//$forms = !empty(get_option('spendino_formselect')) ?
+//    json_decode(get_option('spendino_formselect'), true) : [];
+//echo '<pre>';
+$forms = get_option('spendino_formselect');
+$connection = get_option('spendino_connection');
+//$connection = !empty(get_option('spendino_connection')) ?
+//    json_decode(get_option('spendino_connection'), true) : '';
+$url_api_live = 'https://betagateway.spendino.de';
+$url_api_sandbox = 'https://betagateway.spendino.de';
+$env_url = $url_api_sandbox;
+$env_secret = !empty($connection['env_secret']) ? $connection['env_secret'] : '';
+$env_key = !empty($connection['env_api_key']) ? $connection['env_api_key'] : '';
+//$encrypt_secret =  wp_hash_password($env_secret);
+//$decrypt_secret = wp_check_password($env_secret, $encrypt_secret, '');
+//if($env_secret != ''){
+//    update_option('spendino_connection', array('env_api_key' => $env_key, 'env_secret' => $encrypt_secret, 'env_url' => $env_url), $autoload = null);
+//}
+$demo_form_id = 4387;
+$demo_name = 'Wordpress Demo Formular';
+//var_dump(['get_option direkt', get_option('spendino_formdata')]);
+$helper = get_option('spendino_formdata');
+if (is_array($helper)) {
+    if (isset($helper['formTitle'])) {
+        $formData = array($helper['formTitle'] => $helper);
+    } else {
+        $formData = $helper;
+    }
+
+} else {
+    $formData = json_decode($helper, true);
+}
+if (!isset($formData)) {
+    $formData = [];
+}
+if (empty($env_secret)) {
+    $forms = ['4387' => 'Wordpress Demo Formular'];
+    $formData['demo'] = ['formTitle' => 'Mein Demo Formular', 'formId' => '4387', 'formSettings' => 'display', 'formLanguage' => 'de', 'formShortcode' => 'demo'];
+    update_option('spendino_formselect', $forms);
+    update_option('spendino_formdata', $formData);
+}
+
+$numberOfForms = sizeof($forms);
+
+//echo '</pre>';
+?>
+<input type="hidden" id="demo-mode" value="">
+<h2 class="nav-tab-wrapper">
+    <?php
+    $settingsTab = 'basic';
+    $tabs = array(
+        $settingsTab => __('Settings', 'spendino'),
+        'about' => __('About', 'spendino')
+    );
+    //set current tab
+    $tab = ( isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : $settingsTab);
+    ?>
+    <?php foreach( $tabs as $key => $value ): ?>
+        <a class="nav-tab <?php if( $tab == $key ){ echo 'nav-tab-active'; } ?>" href="<?php echo admin_url() ?>/options-general.php?page=spendino&tab=<?php echo $key; ?>"><?php echo $value; ?></a>
+    <?php endforeach; ?>
+</h2>
+
+<?php if( $tab == $settingsTab): ?>
+
+<!--CODE FOR ADD/ CONNECT/ RETRIEVE BUTTONS HERE-->
+<div class="container ms-0">
+    <h2 class="demo-header mt-3" style="display: none">Demo Modus</h2>
+    <div class="callout-info">
+        <p style="margin-bottom: 0px; font-size: 14px;">
+            <?php echo  __('With the GRÜN spendino plugin you can easily and flexibly add your spendino forms to your WordPress website.', 'spendino') ?>
+            <?php echo __('To do this, first connect to GRÜN spendino by specifying an API key and download the currently defined forms.', 'spendino') ?>
+            <?php echo __('With a few clicks you can now define different representations of the forms and insert them via wordpress shortcode at any place in your pages.', 'spendino') ?>
+        </p>
+    </div>
+
+    <input type="hidden" id="hidden-connection" value="<?php echo esc_attr($connection)  ?>">
+
+    <button type="button" id="addForm" class="button mt-3 me-3" data-bs-toggle="modal" data-bs-target="#addEditForm">
+        <?php echo  __('Add New Form', 'spendino') ?>
+    </button>
+    <button type="button" class="button m-3" data-bs-toggle="modal" data-bs-target="#connectApiModal">
+        <?php echo  __('Connect API', 'spendino') ?>
+        <?php if(!empty($env_secret)) { ?>
+            <span class="dashicons dashicons-yes mt-1 connect-check"></span>
+        <?php } else { ?>
+            <span class="dashicons dashicons-yes mt-1 connect-check" style="display: none"></span>
+        <?php } ?>
+    </button>
+    <button type="button" id="retrievebtn" class="button m-3 ml-0">
+        <?php echo __('Retrieve Data', 'spendino')?>
+<!--        <span class="dashicons dashicons-yes mt-1 retrieve-check"></span>-->
+    </button>
+    <div class="number-of-forms" style="font-size: 12px; display: inline-block; margin-top: 1.5rem"><?php echo esc_attr($numberOfForms)  .  __(' forms found', 'spendino')?> </div>
+
+
+
+<?php include plugin_dir_path( dirname( __FILE__ ) ) . 'partials/button-modals.phtml'; ?>
+<!--WRITE CODE FOR SETTING PAGE HERE WITH TABLE AND FORM METHODS.-->
+    <?php include plugin_dir_path( dirname( __FILE__ ) ) . 'partials/form-table.phtml'; ?>
+
+<!--THIS IS THE FILE THAT INCLUDES THE ABOUT SECTION-->
+<?php elseif( $tab == 'about' ): ?>
+    <?php include plugin_dir_path( dirname( __FILE__ ) ) . 'partials/about.phtml'; ?>
+<?php endif; ?>
+
+</div>
+
+<style>
+    .callout-info{
+        padding: 1rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+        border: 1px solid #e9ecef;
+        border-left-width: 0.5rem;
+        border-radius: 0.25rem;
+    }
+</style>

@@ -1,0 +1,39 @@
+<?php
+$image =  plugins_url() . '/spendino/partials/images/G-logo.jpg';
+?>
+
+
+<div class="container" style="margin-left: 0">
+    <div class="row mt-3">
+        <div class="col-md-6">
+<!--         'spendino' is the text-domain used for the i18n function.-->
+            <h3><?php echo __('Grün Software Group GmbH', 'spendino') ?> </h3>
+            <div class="adresse">
+                <h5><?php echo __('Address', 'spendino') ?>:</h5>
+                <p style="font-size: 15px">
+                    Pascalstraße 6, <br>
+                    52076 Aachen <br>
+                    <?php echo __('Germany', 'spendino') ?>
+                </p>
+            </div>
+            <div class="mb-3">
+                <h5 class="label"><?php echo __('Contact', 'spendino') ?>:</h5>
+                <a class="about-links" href="mailto:partner@spendino.de">partner@spendino.de</a>
+            </div>
+            <div class="website">
+                <h5><?php echo __('Website', 'spendino') ?>:</h5>
+                <a class="about-links" href="https://www.spendino.de">https://www.spendino.de</a><br>
+                <a class="about-links" href="https://www.gruen.net/">https://www.gruen.net/</a>
+            </div>
+        </div>
+        <div class="col-md-6 center">
+            <img height="80%" src="<?php echo esc_attr($image)  ?>" alt="G Logo">
+        </div>
+    </div>
+</div>
+
+<style>
+    .about-links {
+        color: #008677 !important;
+    }
+</style>

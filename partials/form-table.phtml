@@ -1,0 +1,88 @@
+<?php
+
+function spendinoFormSettingString( $setting )
+{
+    $formSetting = '';
+    switch ($setting) {
+        case 'display':
+            $formSetting = 'Formular';
+            break;
+        case 'widget':
+            $formSetting = 'Button';
+            break;
+        case 'widgetA':
+            $formSetting = 'Widget';
+            break;
+        case 'displayoccasion':
+            $formSetting = 'Spendenaktion';
+            break;
+        case 'slider':
+            $formSetting = 'Hilfeleiste';
+            break;
+    }
+
+    return $formSetting;
+}
+
+function spendinoFormLanguageString($lang)
+{
+    $formLanguage = '';
+    switch ($lang) {
+        case 'en':
+            $formLanguage = 'Englisch';
+            break;
+        case 'de':
+            $formLanguage = 'Deutsch';
+            break;
+    }
+    return $formLanguage;
+}
+
+?>
+<style>
+    textarea{
+        resize: none;
+
+    }
+</style>
+<table class="wp-list-table widefat table formConfigTable" id="configFormTable">
+    <thead>
+    <tr>
+        <th scope="col" class="manage-column"><?php echo __('Form Name', 'spendino') ?></th>
+        <th scope="col" class="manage-column"><?php echo __('Description', 'spendino') ?></th>
+        <th scope="col" class="manage-column"><?php echo __('Shortcode', 'spendino') ?></th>
+    </tr>
+    </thead>
+    <tbody id="tableBody" class="live-table-body">
+    <?php foreach ( $formData as $form): ?>
+        <tr class="forms-table-row" id="row">
+            <td class="column-primary">
+                <strong><span class="tableFormTitle label"><?php echo esc_attr($form['formTitle'])  ?></span></strong>
+                <input type="hidden" id="tableFormTitle" value="<?php echo esc_attr($form['formTitle']) ?>">
+                <div class="row-actions visible">
+                <span class="edit">
+                    <a href="" class="edit" id="editForm" data-bs-toggle="modal" data-bs-target="#addEditForm"><?php echo __('Edit', 'spendino') ?></a>
+                </span>
+                    <span class="text-divider-line" id="text-divider-line">|</span>
+                    <span class="delete">
+                    <a href="#" class="delete" type="submit" id="deleteForm"><?php echo __('Delete', 'spendino') ?></a>
+                </span>
+                </div>
+            </td>
+
+            <td class="column-primary">
+                <span class="name"><?php echo esc_attr($forms[$form['formId']])  ?></span> |
+                <span class="settings"><?php echo spendinoFormSettingString($form['formSettings']); ?></span> |
+                <span class="language"><?php echo spendinoFormLanguageString($form['formLanguage']); ?></span>
+            </td>
+            <td class="column-primary">
+                <span class="shortcode-copy">[spendinoForm title="<?php echo esc_attr($form['formShortcode'])  ?>"] </span>
+
+                <span class="copy-icon" style="cursor: pointer" data-shortcode="<?php echo esc_attr($form['formShortcode'])  ?>"><span style="color: #008677" class="dashicons dashicons-admin-page"></span></span>
+                <span class="badge bg-secondary copy-badge" style="display: none"><?php echo __('Copied', 'spendino') ?></span>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<textarea id="copyarea" style="width: 0px; height: 0px; display: block; opacity: 0; resize: none; cursor: default"></textarea>

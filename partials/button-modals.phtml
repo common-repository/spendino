@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * The setting for holds the information for connecting with an instance of spendino
+ *
+ * This file is used to setup a settings field
+ *
+ * @link       https://spendino.de
+ * @since      1.0.0
+ *
+ * @package    Wp_spendino
+ * @subpackage Wp_spendino/admin/partials
+ */
+//
+//$connectData = get_option('spendino_connection');
+
+  /**
+     * Encrypting password
+     * @param password
+     * returns salt and encrypted password
+     */
+
+
+?>
+<style>
+    select {
+        max-width: 100% !important;
+    }
+</style>
+
+<input type="hidden" readonly="readonly" name="spendino_connection[used_environment]" id="selectEnvironment" value="<?php echo $url ?>">
+
+
+<!-- Add Form Modal -->
+<div class="modal fade" id="addEditForm" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title-add" id="exampleModalLabel"><?php echo __('Add Entry', 'spendino') ?></h5>
+                <h5 class="modal-title-edit" id="exampleModalLabel" style="display: none"><?php echo __('Edit Entry', 'spendino') ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="createAddForm" action="options.php" method="post">
+                <div class="modal-body">
+
+                    <?php settings_fields('spendinoform'); ?>
+                    <?php do_settings_sections('spendino_create_edit_form'); ?>
+                    <input type="hidden" id="toggle-edit" value="toggle">
+                    <input type="hidden" id="formData" name="spendino_formdata"
+                           value = '<?php echo json_encode($formData)?>'/>
+                    <input type="hidden" id="formSelect" name="spendino_formselect"
+                           value = "<?php echo json_encode($forms)?>"/>
+                    <div class="formular-name">
+                        <label for="formTitle" class="form-label"><?php echo _e('Form Name', 'spendino') ?></label>
+                        <input required="required" class="form-control" type="text" id="formTitle" name="spendino_formdata_single[formTitle]">
+                        <input type="hidden" id="hiddenFormTitle" class="hiddenFormTitle" value="">
+                    </div>
+                    <div class="formular-select">
+                        <label for="formular" class="form-label"><?php echo _e('Form', 'spendino') ?></label>
+                        <select class="form-select" required="required" name="spendino_formdata_single[formId]" id="formId" onchange="document.getElementById('formName').value=this.options[this.selectedIndex].text">
+                            <option value="select" id="0" readonly="readonly">--Select--</option>
+                            <?php foreach($forms as $key => $value){
+                                echo '<option value="' . esc_attr($key) . '" id="' . esc_attr($key). '" data-details="form_details" data-json="' . json_encode($forms[$key]) . '">' . esc_attr($value) . '</option>';
+                            } ?>
+                        </select>
+                        <input type="hidden" id="formName" name="spendino_formdata_single[formName]" value="">
+                    </div>
+                    <div class="formular-settings mt-3">
+                        <label for="settings" class="form-label"><?php echo _e('Display', 'spendino') ?></label>
+                        <select class="form-select" required="required" name="spendino_formdata_single[formSettings]" id="formSettings">
+                            <option value="select">--Select--</option>
+                            <option value="display">Formular</option>
+                            <option value="widget">Button</option>
+                            <option value="widgetA">Widget</option>
+                            <option value="slider">Hilfeleiste</option>
+                            <option value="displayoccasion">Spendenaktion</option>
+                        </select>
+                    </div>
+                    <div class="formular-language mt-3">
+                        <label for="language" class="form-label"><?php echo _e('Language', 'spendino') ?></label>
+                        <select name="spendino_formdata_single[formLanguage]" required="required" id="formLanguage" class="form-select">
+                            <option value="select">--Select--</option>
+                            <option value="en">Englisch</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="margin-right: 5px" class="button btn-secondary" data-bs-dismiss="modal"><?php echo _e('Close', 'spendino') ?></button>
+                    <button class="button button-primary" type="submit" name="submit" data-bs-dismiss="modal" id="configureForm"><?php echo _e('Save Changes', 'spendino') ?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- API Connect Modal -->
+<div class="modal fade" id="connectApiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo __('API Connection Settings', 'spendino') ?></h5>
+                <button type="button" class="btn-close connect-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="connectionForm" action="options.php" method="post">
+            <div class="modal-body">
+                    <div class="alert alert-success" role="alert" style="display: none">
+                        <?php echo __('Connection Successful', 'spendino') ?>
+                    </div>
+                    <div class="alert alert-danger" role="alert" style="display: none">
+                        <?php echo __('Wrong credentials. Please try again.', 'spendino') ?>
+                    </div>
+                    <?php settings_fields('spendino_connection'); ?>
+                    <?php do_settings_sections('spendino_connection'); ?>
+                    <label for="api-key"><?php echo _e('API-Key', 'spendino')?></label>
+                    <input  class="form-control" type="text" id="env_api_key" name="spendino_connection[env_api_key]"
+                            value = "<?php echo (!empty(esc_attr($env_key) ) ? esc_attr($env_key) : '') ?>"/>
+                    <label for="secret"><?php echo _e('Secret', 'spendino')?></label>
+                    <input class="form-control" type="password" id="env_secret" name="spendino_connection[env_secret]"
+                           value = "<?php echo (!empty( esc_attr($env_secret)) ? esc_attr($env_secret) : '') ?>"/>
+    <!--                --><?php //echo wp_hash_password($env_secret) ?>
+                    <label for="url"><?php echo _e('URL', 'spendino')?></label>
+                    <input class="form-control" type="url" id="env_url" name="spendino_connection[env_url]"
+                           value = "<?php echo (!empty( esc_attr($env_url)) ? esc_attr($env_url) : '') ?>"/>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="connectionBtn" class="button mr-2" style="margin-right: 5px"><?php echo _e('Test Connection', 'spendino') ?></button>
+                <button type="submit" name="submit" data-key="env" data-bs-dismiss="modal" class="button button-primary"> <?php echo _e('Save Changes', 'spendino')?></button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
